@@ -50,8 +50,12 @@ export function QRCodeForm({ QRCode: InitialQRCode }) {
   const onSubmit = useCallback(
     (body) => {
       (async () => {
+        console.log("body", body)
         const parsedBody = body;
+        console.log("parsedBody", parsedBody)
+        console.log("JSON.stringify(parsedBody)", JSON.stringify(parsedBody))
         parsedBody.destination = parsedBody.destination[0];
+        console.log("parsedBody.destination", parsedBody.destination)
         const QRCodeId = QRCode?.id;
         /* construct the appropriate URL to send the API request to based on whether the QR code is new or being updated */
         const url = QRCodeId ? `/api/qrcodes/${QRCodeId}` : "/api/qrcodes";

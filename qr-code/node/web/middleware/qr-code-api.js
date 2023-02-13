@@ -80,6 +80,7 @@ export default function applyQrCodeApiEndpoints(app) {
   });
 
   app.post("/api/qrcodes", async (req, res) => {
+
     try {
       const id = await QRCodesDB.create({
         ...(await parseQrCodeBody(req)),
@@ -98,6 +99,8 @@ export default function applyQrCodeApiEndpoints(app) {
 
   app.patch("/api/qrcodes/:id", async (req, res) => {
     const qrcode = await getQrCodeOr404(req, res);
+
+    console.log(req.body)
 
     if (qrcode) {
       try {
