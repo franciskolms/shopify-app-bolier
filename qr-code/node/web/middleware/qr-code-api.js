@@ -143,6 +143,128 @@ export default function applyQrCodeApiEndpoints(app) {
 		res.send(products.body.data);
 	});
 
+	app.patch("/api/products/add-metafield", async (req, res) => {
+		console.log(req.body.RAK);
+
+		const client = new shopify.api.clients.Graphql({
+			session: res.locals.shopify.session,
+		});
+
+		const products = await client.query({
+			data: {
+				query: `mutation updateProductMetafields($input: ProductInput!) {
+          productUpdate(input: $input) {
+            product {
+              id
+              metafields(first: 3) {
+                edges {
+                  node {
+                    namespace
+                    key
+                    value
+                  }
+                }
+              }
+            }
+            userErrors {
+              message
+              field
+            }
+          }
+        }`,
+				variables: {
+					input: {
+						metafields: [
+							{
+								namespace: "my_field",
+								key: "liner_material",
+								type: "single_line_text_field",
+								value: "Synthetic Leather",
+							},
+						],
+						id: "gid://shopify/Product/8119976460596",
+					},
+				},
+			},
+		});
+
+		res.send(products.body.data);
+	});
+
+	app.patch("/api/products/edit-metafield", async (req, res) => {
+		console.log(req.body.RAK);
+
+		const client = new shopify.api.clients.Graphql({
+			session: res.locals.shopify.session,
+		});
+
+		const products = await client.query({
+			data: {
+				query: `mutation updateProductMetafields($input: ProductInput!) {
+          productUpdate(input: $input) {
+            product {
+              id
+              metafields(first: 3) {
+                edges {
+                  node {
+                    namespace
+                    key
+                    value
+                    id
+                  }
+                }
+              }
+            }
+            userErrors {
+              message
+              field
+            }
+          }
+        }`,
+				variables: {
+					input: {
+						metafields: [
+							{
+								namespace: "my_field",
+								key: "liner_material",
+								type: "single_line_text_field",
+								value: "Synthetic Leather",
+							},
+						],
+						id: "gid://shopify/Product/8119976460596",
+					},
+				},
+			},
+		});
+
+		res.send(products.body.data);
+	});
+
+	app.post("/api/products/tests", async (req, res) => {
+		console.log(req.body.RAK);
+
+		const client = new shopify.api.clients.Graphql({
+			session: res.locals.shopify.session,
+		});
+
+		const products = await client.query({
+			data: {
+				query: `
+        mutation {
+          productUpdate(input: {id: "gid://shopify/Product/8119976460596", title: "${req.body.RAK}"}) {
+            product {
+              id
+              title
+            }
+          }
+        }
+        `,
+			},
+		});
+
+		res.send(products.body.data);
+	});
+
 	app.post("/api/qrcodes", async (req, res) => {
 		try {
 			const id = await QRCodesDB.create({

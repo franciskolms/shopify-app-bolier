@@ -88,12 +88,63 @@ export function QRCodeForm({ QRCode: InitialQRCode }) {
 	//---------------------------------------------------------//
 
 	useEffect(() => {
-		console.log("Exakute 1");
+		// console.log("Exakute 1");
 
-		// GET REQUEST
-		const GetFunc = async () => {
-			const response = await fetch("/api/products", {
-				method: "GET",
+		// // GET REQUEST
+		// const GetFunc = async () => {
+		// 	const response = await fetch("/api/products", {
+		// 		method: "GET",
+		// 		headers: { "Content-Type": "application/json" },
+		// 	});
+		// 	if (response.ok) {
+		// 		const res = await response.json();
+		// 		console.log(res);
+		// 	}
+		// };
+
+		// GetFunc();
+
+		// console.log("Exakute 2");
+
+		// // EDIT REQUEST
+		// const EditFunc = async () => {
+		// 	const response = await fetch("/api/products/edit", {
+		// 		method: "PATCH",
+		// 		body: JSON.stringify({ RAK: "/api/products/edit" }),
+		// 		headers: { "Content-Type": "application/json" },
+		// 	});
+		// 	if (response.ok) {
+		// 		const res = await response.json();
+		// 		console.log(res);
+		// 	}
+		// };
+
+		// EditFunc();
+
+		// console.log("Exakute 3");
+
+		// // EDIT REQUEST WITH VARIABLES
+		// const AddMetafield = async () => {
+		// 	const response = await fetch("/api/products/add-metafield", {
+		// 		method: "PATCH",
+		// 		body: JSON.stringify({ RAK: "/api/products/add-metafield" }),
+		// 		headers: { "Content-Type": "application/json" },
+		// 	});
+		// 	if (response.ok) {
+		// 		const res = await response.json();
+		// 		console.log(res);
+		// 	}
+		// };
+
+		// AddMetafield();
+
+		console.log("Exakute 4");
+
+		// EDIT REQUEST WITH VARIABLES
+		const Tests = async () => {
+			const response = await fetch("/api/products/tests", {
+				method: "POST",
+				body: JSON.stringify({ RAK: "/api/products/tests" }),
 				headers: { "Content-Type": "application/json" },
 			});
 			if (response.ok) {
@@ -102,24 +153,7 @@ export function QRCodeForm({ QRCode: InitialQRCode }) {
 			}
 		};
 
-		GetFunc();
-
-		console.log("Exakute 2");
-
-		// EDIT REQUEST
-		const EditFunc = async () => {
-			const response = await fetch("/api/products/edit", {
-				method: "PATCH",
-				body: JSON.stringify({ RAK: "ZIS KAMS FROM RIAKTU" }),
-				headers: { "Content-Type": "application/json" },
-			});
-			if (response.ok) {
-				const res = await response.json();
-				console.log(res);
-			}
-		};
-
-		EditFunc();
+		Tests();
 	}, []);
 
 	//---------------------------------------------------------//
